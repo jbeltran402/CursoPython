@@ -4,7 +4,7 @@
 texto = "ja"
 print(texto * 10)
 
-# Para qe hayan saltos de linea sin usar \n se uan """
+# Para qe hayan saltos de linea sin usar \n se usa """
 texto = """Hola mi nombre es Juan
 Y me gusta programar en Python,
 Es muy útil"""

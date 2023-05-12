@@ -1,4 +1,4 @@
-# - las tuplas no pueden ser reasignadas (Su valior es fijo)
+# - las tuplas no pueden ser reasignadas (Su valor es fijo)
     # ocupan menos espacio de memoria
     # Son a prueba de daños
 # - Pueden contener cualquier tipo de dato contenido
