@@ -22,9 +22,9 @@ for i in range(3):
 print("\nAnalisis del texto\n")
 
 # 1). identificar cuantas veces aprarecen las letras selccionadas
-for i in range(len(letras)):
-    indice_diccionario = letras[i]
-    print(f"la letra {indice_diccionario} se repite {texto.count(letras[i])} veces")
+for letra in letras:
+    indice_diccionario = letra
+    print(f"la letra {indice_diccionario} se repite {texto.count(letra)} veces")
 
 # 2). Cuantas palabras hay en total
 print(f"\nEl texto cuenta con {len(texto.split())} palabras\n")
