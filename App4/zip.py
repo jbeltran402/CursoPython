@@ -15,3 +15,10 @@ paises = ["Alemania", "Japón", "Francia", "Finlandia", "Canadá", "Australia"]
 paises_capitales = list(zip(paises,capitales))
 for pais,capital in paises_capitales:
     print(f"La capital de {pais} es {capital}")
+    
+numeros_es = ['uno', 'dos', 'tres', 'cuatro', 'cinco']
+numeros_pt = ['um', 'dois', 'três', 'quatro', 'cinco']
+numeros_en = ['one', 'two', 'three', 'four', 'five']
+
+numeros = list(zip(numeros_es,numeros_pt,numeros_en))
+print (numeros)
