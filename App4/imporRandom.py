@@ -15,3 +15,6 @@ print(f"letra aleatoria de la a - h -> {aleatorio}")
 
 shuffle(letras)
 print(f"letras mezcladas aleatoriamente de la a - h \n{letras}")
+
+valores = [1, 2, 3, 4, 5, 6, 9.5] 
+valores_pares = [par for par in valores if (par % 2 == 0)]
