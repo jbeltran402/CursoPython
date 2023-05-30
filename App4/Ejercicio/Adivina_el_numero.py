@@ -6,9 +6,7 @@
 from random import randint 
 
 numero_aleatorio = randint(1,100)
-print(numero_aleatorio)
 rango = {"menor":1,"mayor":100}
-
 nombre = input("¿Cúal es tu nombre?\n")
 
 estado = True
@@ -20,9 +18,8 @@ for i in range(8):
             continue
         else:
             estado = False
-
     if numero == numero_aleatorio:
-        print(f"Felicidades {nombre} ¡Haz ganado!")
+        print(f"Felicidades {nombre} ¡Haz ganado! en {i+1} intentos")
         break
     elif numero > numero_aleatorio and rango['mayor'] > numero:
         print("El numero seleccionado es mayor que el numero aleatorio")
