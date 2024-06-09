@@ -1,9 +1,11 @@
-"""Modulo que captura informacion del sistema."""
+"""clase que efectua dunciones para las recetas"""
 import os
+from pathlib import Path
 
 class Recetas:
     """Funciones asociadas a la administracion de recetas"""
-
+    ruta_global:str = str(Path('App6','Proyecto','Recetas'))
+    
     def numero_de_archivos_en_un_directorio(self) -> int:
         """
         Cuenta el número total de archivos en un directorio y sus subdirectorios.
@@ -12,11 +14,11 @@ class Recetas:
             int: Número total de archivos en el directorio y sus subdirectorios.
         """
         total_archivos:int = 0
-        for _, _, archivos in os.walk('App6/Proyecto/Recetas'):
+        for _, _, archivos in os.walk(str(self.ruta_global)):
             total_archivos += len(archivos)
         return total_archivos
     
-    def listar_recetas(self, directorio:str)-> str:
+    def listar_categorias(self, directorio:str)-> str:
         """Muestra una lista de categorías y solicita al usuario que elija una.
 
         Returns:
@@ -51,9 +53,43 @@ class Recetas:
             list: Una lista de nombres de recetas en el directorio especificado.
         """
         listado_de_recetas:list = []
-        for _,_,nombre_de_archivos in os.walk(f"App6/Proyecto/Recetas/{directorio}"):
+        ruta:Path = Path(self.ruta_global,directorio)
+        for _,_,nombre_de_archivos in os.walk(str(ruta)):
             for archivo in nombre_de_archivos:
                 # Si el archivo no es un archivo de zona de identificación y termina con ".txt", lo añadimos a la lista de recetas
                 if ".txt:Zone.Identifier" not in archivo:
                     listado_de_recetas.append(archivo.replace(".txt",""))
         return listado_de_recetas
+    
+    def leer_receta(self, categoria_seleccionada:str, receta_seleccionada:str) -> None:
+        """
+        Lee y muestra el contenido de una receta seleccionada.
+
+        Construye la ruta del archivo de receta usando la categoría y el nombre proporcionados,
+        lee su contenido y lo muestra en la consola. Luego espera una tecla para volver al menú.
+
+        Args:
+            categoria_seleccionada (str): La categoría de la receta seleccionada.
+            receta_seleccionada (str): El nombre de la receta seleccionada.
+
+        Returns:
+            None
+        """
+        ruta_receta: Path = Path(self.ruta_global, categoria_seleccionada, receta_seleccionada + '.txt')
+        with open(str(ruta_receta), 'r', encoding='utf-8') as archivo:
+            contenido = archivo.read()
+            print(contenido)
+        input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
+    
+    def crear_receta(self, categoria_seleccionada:str) -> None:
+        nombre_receta = input("Introduce el nombre de la receta que desea crear\n")
+        ruta_receta:Path = Path(self.ruta_global,categoria_seleccionada,nombre_receta+'.txt')
+        print("Introduce las líneas de texto (deja una línea vacía para terminar):\n")
+        while True:
+            linea = input()
+            if linea == "":
+                break
+            else:
+                with open(ruta_receta, 'a', encoding='utf-8') as archivo:
+                    archivo.write(linea + '\n')
+        input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
