@@ -33,7 +33,7 @@ while True:
         recetas.crear_receta(categoria_seleccionada)
     elif opcion_seleccionada == "3":
         os.system('clear')
-        print(opcion_seleccionada)
+        categorias.crear_categoria()
     elif opcion_seleccionada == "4":
         os.system('clear')
         print(opcion_seleccionada)
