@@ -18,7 +18,7 @@ class Recetas:
             total_archivos += len(archivos)
         return total_archivos
     
-    def listar_categorias(self, directorio:str)-> str:
+    def listar_recetas(self, directorio:str)-> str:
         """Muestra una lista de categorías y solicita al usuario que elija una.
 
         Returns:
@@ -27,8 +27,10 @@ class Recetas:
         recetas = Recetas()
         estado = True
         while estado:
-            print("\nIngrese el numero de una receta en la que desea leer:")
             listado_de_recetas = recetas.listar_recetas_de_un_directorio(directorio)
+            if len(listado_de_recetas) < 1:
+                return "sin elementos"
+            print("\nIngrese el numero de una receta en la que desea leer:")
             for indice, receta in enumerate(listado_de_recetas):
                 print(f"   {indice+1}. {receta}")
             try:
@@ -56,7 +58,8 @@ class Recetas:
         ruta:Path = Path(self.ruta_global,directorio)
         for _,_,nombre_de_archivos in os.walk(str(ruta)):
             for archivo in nombre_de_archivos:
-                # Si el archivo no es un archivo de zona de identificación y termina con ".txt", lo añadimos a la lista de recetas
+                # Si el archivo no es un archivo de zona de identificación y
+                # termina con ".txt", lo añadimos a la lista de recetas
                 if ".txt:Zone.Identifier" not in archivo:
                     listado_de_recetas.append(archivo.replace(".txt",""))
         return listado_de_recetas
@@ -64,9 +67,6 @@ class Recetas:
     def leer_receta(self, categoria_seleccionada:str, receta_seleccionada:str) -> None:
         """
         Lee y muestra el contenido de una receta seleccionada.
-
-        Construye la ruta del archivo de receta usando la categoría y el nombre proporcionados,
-        lee su contenido y lo muestra en la consola. Luego espera una tecla para volver al menú.
 
         Args:
             categoria_seleccionada (str): La categoría de la receta seleccionada.
@@ -82,6 +82,13 @@ class Recetas:
         input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
     
     def crear_receta(self, categoria_seleccionada:str) -> None:
+        """
+        Solicita al usuario el nombre de una categoría, verifica si ya existe (ignorando mayúsculas 
+        y minúsculas),y si no existe, crea un nuevo directorio para la categoría.
+
+        Returns:
+            None
+        """
         nombre_receta = input("Introduce el nombre de la receta que desea crear\n")
         ruta_receta:Path = Path(self.ruta_global,categoria_seleccionada,nombre_receta+'.txt')
         print("Introduce las líneas de texto (deja una línea vacía para terminar):\n")
@@ -92,4 +99,22 @@ class Recetas:
             else:
                 with open(ruta_receta, 'a', encoding='utf-8') as archivo:
                     archivo.write(linea + '\n')
+        input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
+    def eliminar_receta(self, categoria_seleccionada:str, receta_seleccionada:str) -> None:
+        """
+        Elimina una receta seleccionada.
+
+        Args:
+            categoria_seleccionada (str): La categoría de la receta seleccionada.
+            receta_seleccionada (str): El nombre de la receta seleccionada.
+
+        Returns:
+            None
+        """
+        ruta_receta: Path = Path(self.ruta_global, categoria_seleccionada, receta_seleccionada + '.txt')
+        try:
+            os.remove(ruta_receta)
+            print(f'\nLa receta {receta_seleccionada} fue eliminada correctamente')
+        except OSError as error:
+            print('\n\033[1;33mError al eliminar el rirectorio '+ error+'\033[0m')
         input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
