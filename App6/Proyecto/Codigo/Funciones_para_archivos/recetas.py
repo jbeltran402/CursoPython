@@ -5,7 +5,6 @@ from pathlib import Path
 class Recetas:
     """Funciones asociadas a la administracion de recetas"""
     ruta_global:str = str(Path('App6','Proyecto','Recetas'))
-    
     def numero_de_archivos_en_un_directorio(self) -> int:
         """
         Cuenta el número total de archivos en un directorio y sus subdirectorios.
@@ -17,7 +16,6 @@ class Recetas:
         for _, _, archivos in os.walk(str(self.ruta_global)):
             total_archivos += len(archivos)
         return total_archivos
-    
     def listar_recetas(self, directorio:str)-> str:
         """Muestra una lista de categorías y solicita al usuario que elija una.
 
@@ -44,7 +42,6 @@ class Recetas:
             except ValueError:
                 os.system('clear')
                 print("\n\033[1;33mEl valor ingresado no coincide con la lista de recetas\033[0m")
-
     def listar_recetas_de_un_directorio(self, directorio:str ) -> list:
         """Devuelve una lista de recetas en un directorio específico.
 
@@ -63,7 +60,6 @@ class Recetas:
                 if ".txt:Zone.Identifier" not in archivo:
                     listado_de_recetas.append(archivo.replace(".txt",""))
         return listado_de_recetas
-    
     def leer_receta(self, categoria_seleccionada:str, receta_seleccionada:str) -> None:
         """
         Lee y muestra el contenido de una receta seleccionada.
@@ -80,7 +76,6 @@ class Recetas:
             contenido = archivo.read()
             print(contenido)
         input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")
-    
     def crear_receta(self, categoria_seleccionada:str) -> None:
         """
         Solicita al usuario el nombre de una categoría, verifica si ya existe (ignorando mayúsculas 
@@ -116,5 +111,5 @@ class Recetas:
             os.remove(ruta_receta)
             print(f'\nLa receta {receta_seleccionada} fue eliminada correctamente')
         except OSError as error:
-            print('\n\033[1;33mError al eliminar el rirectorio '+ error+'\033[0m')
+            print('\n\033[1;33mError al eliminar el Directorio '+ error+'\033[0m')
         input("\n\033[1;33mPara volver al menú principal precione Enter\033[0m")

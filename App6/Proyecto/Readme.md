@@ -28,13 +28,13 @@ Programa en el que un usuario puede crear, administrar y eliminar recetas.
 
 ## Requerimientos
 
-1. Saludo de bienvenida -> OK
-2. Solicitar el directorio: -> 
+1. Saludo de bienvenida
+2. Solicitar el directorio:
    - Carnes
    - Ensaladas
    - Pastas
    - Postres
-3. Informar el número de recetas disponibles -> OK
+3. Informar el número de recetas disponibles
 4. Seleccionar una de las siguientes opciones:
    - Leer receta
      - Elegir categoría
